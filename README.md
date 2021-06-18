@@ -1,2 +1,2 @@
 # admin-edu
-admin-edu will be a student/teacher/admin portal for a school's database, which allows users to login, see grades, submit assignments, grade assignments, see class syllabus etc.
+admin-edu will be a athlete/coach/parent/admin portal for an athletic department's database, which allows users to login, see games, see practice schedules, see player statistics etc.

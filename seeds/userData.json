@@ -4,39 +4,34 @@
     "last_name": "hassan",
     "username": "abdaleuser",
     "email": "sal@hotmail.com",
-    "password": "password12345",
-    "role_id": 2
+    "password": "password12345"
   },
   {
     "first_name": "connor",
     "last_name": "gannaway",
     "username": "connoruser",
     "email": "connor@email.com",
-    "password": "password12345",
-    "role_id": 1
+    "password": "password12345"
   },
   {
     "first_name": "bryan",
     "last_name": "barnes",
     "username": "bryanuser",
-    "email": "sal@hotmail.com",
-    "password": "password12345",
-    "role_id": 2
+    "email": "bryan@hotmail.com",
+    "password": "password12345"
   },
   {
     "first_name": "blake",
     "last_name": "wright",
     "username": "blakeuser",
     "email": "blake@email.com",
-    "password": "password12345",
-    "role_id": 3
+    "password": "password12345"
   },
   {
     "first_name": "Chris",
     "last_name": "Chris's Last Name",
     "username": "chrisuser",
     "email": "chris@email.com",
-    "password": "password12345",
-    "role_id": 3
+    "password": "password12345"
   }
 ]

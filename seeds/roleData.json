@@ -3,9 +3,11 @@
     "title": "Admin"
   },
   {
-    "title": "Coach"
+    "title": "Coach",
+    "team_id": "1"
   },
   {
-    "title": "Player"
+    "title": "Player",
+    "team_id": "1"
   }
 ]

@@ -1,25 +1,30 @@
 const { Model, DataTypes } = require('sequelize');
+
 const sequelize = require('../config/connection');
 
-class Role extends Model {}
+class UserRole extends Model {}
 
-Role.init(
+UserRole.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
+    user_id: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    team_id: {
-      type: DataTypes.INTEGER,
       references: {
-        model: 'team',
+        model: 'user',
         key: 'id',
+        unique: false,
+      },
+    },
+    role_id: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'role',
+        key: 'id',
+        unique: false,
       },
     },
   },
@@ -28,8 +33,8 @@ Role.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'role',
+    modelName: 'user_role',
   }
 );
 
-module.exports = Role;
+module.exports = UserRole;

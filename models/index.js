@@ -1,23 +1,47 @@
 const User = require('./User');
 const Role = require('./Role');
 const Team = require('./Team');
+const UserRole = require('./UserRole');
 
-User.hasOne(Role, {
-  foreignKey: 'role_id',
+User.belongsToMany(Role, {
+  through: {
+    model: UserRole,
+    unique: false,
+  },
+});
+
+Role.belongsToMany(User, {
+  through: {
+    model: UserRole,
+    unique: false,
+  },
+});
+
+Role.belongsTo(Team, {
+  foreignKey: 'team_id',
+});
+
+Team.hasMany(Role, {
+  foreignKey: 'team_id',
   onDelete: 'CASCADE',
 });
 
-Role.belongsTo(User, {
-  foreignKey: 'role_id',
-});
+// User.belongsTo(Team, {
+//   foreignKey: 'team_id',
+// });
 
-Team.hasMany(User, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
-});
+// Team.hasMany(User, {
+//   foreignKey: 'team_id',
+//   onDelete: 'CASCADE',
+// });
 
-User.belongsTo(Team, {
-  foreignKey: 'user_id',
-});
+// Team.belongsTo(User, {
+//   foreignKey: 'user_id',
+// });
 
-module.exports = { User, Role, Team };
+// User.hasMany(Team, {
+//   foreignKey: 'user_id',
+//   onDelete: 'CASCADE',
+// });
+
+module.exports = { User, Role, Team, UserRole };

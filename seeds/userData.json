@@ -13,7 +13,7 @@
     "username": "connoruser",
     "email": "connor@email.com",
     "password": "password12345",
-    "role_id": 3
+    "role_id": 1
   },
   {
     "first_name": "bryan",
@@ -29,6 +29,14 @@
     "username": "blakeuser",
     "email": "blake@email.com",
     "password": "password12345",
-    "role_id": 4
+    "role_id": 3
+  },
+  {
+    "first_name": "Chris",
+    "last_name": "Chris's Last Name",
+    "username": "chrisuser",
+    "email": "chris@email.com",
+    "password": "password12345",
+    "role_id": 3
   }
 ]

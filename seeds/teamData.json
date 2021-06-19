@@ -1,21 +1,14 @@
 [
   {
-    "team_name": "Rockets",
-    "coach_id": 1,
-    "user_id": [1, 5, 3, 4]
+    "team_name": "Rockets"
   },
   {
-    "team_name": "Tornados",
-    "coach_id": 1,
-    "user_id": [1, 5, 3, 4]
+    "team_name": "Tornados"
   },
   {
-    "team_name": "Titans",
-    "coach_id": 2,
-    "user_id": [1, 5, 3, 4]
+    "team_name": "Titans"
   },
   {
-    "team_name": "RandomTEAMNAME",
-    "user_id": [1, 5, 3, 4]
+    "team_name": "RandomTEAMNAME"
   }
 ]

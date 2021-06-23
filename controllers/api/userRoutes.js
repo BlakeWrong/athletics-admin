@@ -10,6 +10,11 @@ router.post('/', async (req, res) => {
     res.status(200).json(userData);
     res.redirect('/login');
   } catch (err) {
+    //ADD LOGIC FOR CATCHING all errors ERRORS ON LOGIN
+    console.error(err.errors[0].message);
+    if (err.errors[0].message.includes('unique')) {
+      res.status(406).json({ message: err.errors[0].message });
+    }
     res.status(400).json(err);
   }
 });

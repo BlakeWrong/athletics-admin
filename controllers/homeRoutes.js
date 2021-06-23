@@ -88,6 +88,7 @@ router.get('/signup', (req, res) => {
   try {
     res.render('signup', {
       logged_in: req.session.logged_in,
+      layout: 'empty.handlebars',
     });
   } catch (err) {
     res.status(500).json(err);
@@ -100,7 +101,7 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('login', { layout: 'empty.handlebars' });
 });
 
 module.exports = router;

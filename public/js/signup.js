@@ -24,7 +24,8 @@ const signupFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/login');
     } else {
-      alert(response.statusText);
+      const json = await response.json();
+      alert(json.message);
     }
   }
 };

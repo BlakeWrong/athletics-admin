@@ -21,7 +21,7 @@ Event.init(
     },
     team_id: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'team',
         key: 'id',

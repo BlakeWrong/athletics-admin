@@ -47,20 +47,6 @@ User.init(
         len: [8],
       },
     },
-    // role_id: {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: 'role',
-    //     key: 'id',
-    //   },
-    // },
-    //   team_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //       model: 'team',
-    //       key: 'id',
-    //     },
-    //   },
   },
   {
     hooks: {

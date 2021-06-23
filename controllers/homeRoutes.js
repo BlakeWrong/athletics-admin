@@ -1,68 +1,103 @@
 const router = require('express').Router();
-const { User, Role, Team } = require('../models');
+// const {  User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
-  // Serialize data so the template can read it
-  const projects = projectData.map((project) => project.get({ plain: true }));
-
-  // Pass serialized data and session flag into template
-  res.render('homepage', {
-    projects,
-    logged_in: req.session.logged_in,
-  });
+  //route to render home page
+  try {
+    res.render('homepage', {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// router.get('/project/:id', async (req, res) => {
-//   try {
-//     const projectData = await Project.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: User,
-//           attributes: ['name'],
-//         },
-//       ],
-//     });
+router.get('/admin', async (req, res) => {
+  //route to render admin console
+  try {
+    res.render('admin', {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-//     const project = projectData.get({ plain: true });
+router.get('/users', async (req, res) => {
+  //route to render all users
+  try {
+    res.render('users', {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-//     res.render('project', {
-//       ...project,
-//       logged_in: req.session.logged_in
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+router.get('/teams', async (req, res) => {
+  //route to render all teams
+  try {
+    res.render('teams', {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-// // Use withAuth middleware to prevent access to route
-// router.get('/profile', withAuth, async (req, res) => {
-//   try {
-//     // Find the logged in user based on the session ID
-//     const userData = await User.findByPk(req.session.user_id, {
-//       attributes: { exclude: ['password'] },
-//       include: [{ model: Project }],
-//     });
+router.get('/teams/:id', async (req, res) => {
+  //route to render 1 team
+  try {
+    res.render('team', {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-//     const user = userData.get({ plain: true });
+router.get('/user/:username', async (req, res) => {
+  //route to render user profile
+  try {
+    res.render('profile', {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-//     res.render('profile', {
-//       ...user,
-//       logged_in: true
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+router.get('/schedule', async (req, res) => {
+  //route to render user profile
+  try {
+    res.render('schedule', {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-// router.get('/login', (req, res) => {
-//   // If the user is already logged in, redirect the request to another route
-//   if (req.session.logged_in) {
-//     res.redirect('/profile');
-//     return;
-//   }
+router.get('/signup', (req, res) => {
+  //route to render signup page
+  try {
+    res.render('signup', {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-//   res.render('login');
-// });
+router.get('/login', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/homepage');
+    return;
+  }
+
+  res.render('login');
+});
 
 module.exports = router;

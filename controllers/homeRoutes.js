@@ -59,11 +59,14 @@ router.get('/teams/:id', withAuth, async (req, res) => {
         },
       ],
     });
-    // res.render('teams', {
-    //   teamData,
-    //   logged_in: req.session.logged_in,
-    // });
-    res.status(200).json(teamData);
+
+    const team = teamData.get({ plain: true });
+
+    res.render('teams', {
+      team,
+      logged_in: req.session.logged_in,
+    });
+    // res.status(200).json(teamData);
   } catch (err) {
     res.status(500).json(err);
   }

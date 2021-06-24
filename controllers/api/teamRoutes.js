@@ -27,6 +27,16 @@ router.get('/:id', withAuth, async (req, res) => {
         },
       ],
     });
+    // const teamMembers = await UserRole.findAll({
+    //   include: [
+    //     {
+    //       model: Role,
+    //       where: {
+    //         team_id: req.params.id,
+    //       },
+    //     },
+    //   ],
+    // });
     // res.render('teams', { team, events, logged_in: req.session.logged_in });
     res.status(200).json(teamData);
   } catch (err) {

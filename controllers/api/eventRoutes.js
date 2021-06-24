@@ -15,10 +15,7 @@ router.get('/:team_id', withAuth, async (req, res) => {
         },
       ],
     });
-    const events = eventData.map((event) => event.get({ plain: true }));
-    const team = events[0].team.team_name;
-    res.render('schedule', { team, events, logged_in: req.session.logged_in });
-    // res.status(200).json(eventData);
+    res.status(200).json(eventData);
   } catch (err) {
     res.status(500).json(err);
   }

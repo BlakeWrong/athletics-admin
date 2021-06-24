@@ -3,6 +3,7 @@ const Role = require('./Role');
 const Team = require('./Team');
 const UserRole = require('./UserRole');
 const Event = require('./Event');
+const Announcement = require('./Announcement');
 
 User.belongsToMany(Role, {
   through: {
@@ -36,4 +37,13 @@ Team.hasMany(Event, {
   onDelete: 'CASCADE',
 });
 
-module.exports = { User, Role, Team, UserRole, Event };
+Announcement.belongsTo(Team, {
+  foreignKey: 'team_id',
+});
+
+Team.hasMany(Announcement, {
+  foreignKey: 'team_id',
+  onDelete: 'CASCADE',
+});
+
+module.exports = { User, Role, Team, UserRole, Event, Announcement };

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-// const {  User } = require('../models');
+const { User, Team, Event, Announcement } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
@@ -49,9 +49,21 @@ router.get('/teams', withAuth, async (req, res) => {
 router.get('/teams/:id', withAuth, async (req, res) => {
   //route to render 1 team
   try {
-    res.render('team', {
-      logged_in: req.session.logged_in,
+    const teamData = await Team.findByPk(req.params.id, {
+      include: [
+        {
+          model: Event,
+        },
+        {
+          model: Announcement,
+        },
+      ],
     });
+    // res.render('teams', {
+    //   teamData,
+    //   logged_in: req.session.logged_in,
+    // });
+    res.status(200).json(teamData);
   } catch (err) {
     res.status(500).json(err);
   }

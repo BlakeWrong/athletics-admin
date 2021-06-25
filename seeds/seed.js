@@ -1,11 +1,12 @@
 const sequelize = require('../config/connection');
-const { User, Team, Role, UserRole, Event } = require('../models');
+const { User, Team, Role, UserRole, Event, Announcement} = require('../models');
 
 const userData = require('./userData.json');
 const roleData = require('./roleData.json');
 const teamData = require('./teamData.json');
 const userRoleData = require('./userRoleData.json');
 const eventData = require('./eventData.json');
+const announcement = require('./announcement.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -27,6 +28,10 @@ const seedDatabase = async () => {
     returning: true,
   });
   await Event.bulkCreate(eventData, {
+    individualHooks: true,
+    returning: true,
+  });
+  await Announcement.bulkCreate(announcement, {
     individualHooks: true,
     returning: true,
   });

@@ -35,4 +35,27 @@ router.post('/:team_id', withAuth, async (req, res) => {
   }
 });
 
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    await Event.update(
+      {
+        event_name: req.body.event_name,
+        event_date: req.body.event_date,
+        team_id: req.body.team_id,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    const editedEvent = await Event.findByPk(req.params.id);
+
+    res.status(200).json(editedEvent);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 module.exports = router;

@@ -15,15 +15,22 @@ router.get('/:id', withAuth, async (req, res) => {
       include: [
         {
           model: Event,
-          where: {
-            team_id: req.params.id,
-          },
         },
         {
           model: Announcement,
-          where: {
-            team_id: req.params.id,
-          },
+        },
+        {
+          model: Role,
+          include: [
+            {
+              model: UserRole,
+              include: [
+                {
+                  model: User,
+                },
+              ],
+            },
+          ],
         },
       ],
     });

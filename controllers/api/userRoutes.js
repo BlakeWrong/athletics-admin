@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, UserRole, Role, Team } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', async (req, res) => {
@@ -16,7 +16,32 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const userData = await User.findOne({
+      where: { email: req.body.email },
+      include: [
+        {
+          model: UserRole,
+          include: [
+            {
+              model: Role,
+              include: [
+                {
+                  model: Team,
+                  plain: true,
+                  nest: true,
+                },
+              ],
+              plain: true,
+              nest: true,
+            },
+          ],
+          plain: true,
+          nest: true,
+        },
+      ],
+      plain: true,
+      nest: true,
+    });
 
     if (!userData) {
       res
@@ -33,12 +58,19 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect email or password, please try again' });
       return;
     }
-
+    const user = userData.get({ plain: true, nest: true });
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-
-      res.json({ user: userData, message: 'You are now logged in!' });
+      const teams = user.user_roles.map((userRole) => {
+        return userRole.role.team;
+      });
+      req.session.teams = teams;
+      const { password, ...userResponse } = user;
+      res.json({
+        user: userResponse,
+        message: 'You are now logged in!',
+      });
     });
   } catch (err) {
     res.status(400).json(err);
@@ -52,6 +84,57 @@ router.post('/logout', withAuth, (req, res) => {
     });
   } else {
     res.status(404).end();
+  }
+});
+
+router.get('/', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: UserRole,
+          include: [
+            {
+              model: Role,
+              include: [
+                {
+                  model: Team,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+router.get('/:id', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: UserRole,
+          include: [
+            {
+              model: Role,
+              include: [
+                {
+                  model: Team,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

@@ -14,7 +14,16 @@ router.post('/', withAuth, async (req, res) => {
     const teamData = await Team.create({
       team_name: req.body.team_name,
     });
-    res.status(200).json(teamData);
+
+    const newPlayerRole = await Role.create({
+      title: 'Player',
+      team_id: teamData.id,
+    });
+    const newCoachRole = await Role.create({
+      title: 'Coach',
+      team_id: teamData.id,
+    });
+    res.status(200).json(teamData, newPlayerRole, newCoachRole);
   } catch (err) {
     res.status(500).json(err);
   }

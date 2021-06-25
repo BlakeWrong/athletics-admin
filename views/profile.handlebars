@@ -2,7 +2,9 @@
 <div class='card-container'>
   <div class='card' style='width: 18rem'>
     <div class='card-header'>Name: {{user.first_name}} {{user.last_name}}</div>
-    <div class='card-header'>Role: {{user.role}}</div>
+    {{#each user.user_roles as |userrole|}}
+      <div class='card-header'>Roles:
+        {{userrole.role.title}}</div>{{/each}}
     <ul class='list-group list-group-flush'>
       <li class='list-group-item'>Email: {{user.email}}</li>
       {{#each teams as |team|}}

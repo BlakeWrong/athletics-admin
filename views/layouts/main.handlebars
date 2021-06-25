@@ -57,20 +57,13 @@
         <a class='navbar-brand' aria-current='page' href='/'>Home</a>
       </li>
       <li class='nav-item'>
-        <a class='navbar-brand' href='/'>homepage</a>
-      </li>
-      <li class='nav-item'>
         <a class='navbar-brand' href='user/{{home_user.username}}'>profile</a>
       </li>
-      <li class='nav-item'>
-        <a class='navbar-brand' href='/team'>team</a>
-      </li>
-      <li class='nav-item'>
-        <a class='navbar-brand' href='/teams'>teams</a>
-      </li>
-      <li class='nav-item'>
-        <a class='navbar-brand' href='/users'>users</a>
-      </li>
+      {{#if is_admin}}
+        <li class='nav-item'>
+          <a class='navbar-brand' href='/admin'>admin dashboard</a>
+        </li>
+      {{/if}}
       <li class='nav-item'>
         <button class='nav-link' id='logout'>logout</button>
       </li>

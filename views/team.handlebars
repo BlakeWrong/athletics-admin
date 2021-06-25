@@ -2,7 +2,7 @@
 {{#each team.events as |event|}}
   <div class='card-container'>
     <div class='card'>
-      <div class='card-header'>event.event_name{{event.event_name}}</div>
+      <div class='card-header'>{{event.event_name}}</div>
       <div>
         <p>Date:{{format_date event.event_date}}</p>
         <p>Time:{{format_time event.event_date}}</p>

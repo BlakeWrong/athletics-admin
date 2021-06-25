@@ -1,1 +1,9 @@
-<h1>homepage</h1>
+{{#each teams as |team|}}
+  <a href='/team/{{team.id}}'>
+    <div class='card-container'>
+      <div class='card' style='width: 18rem'>
+        <div class='card-header'>Name: {{team.team_name}}</div>
+      </div>
+    </div>
+  </a>
+{{/each}}

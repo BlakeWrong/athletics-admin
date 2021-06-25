@@ -1,1 +1,20 @@
-<h1>profile</h1>
+<h1>Your Profile</h1>
+<div class='card-container'>
+  <div class='card' style='width: 18rem'>
+    <div class='card-header'>Name: {{user.first_name}} {{user.last_name}}</div>
+    <div class='card-header'>Role: {{user.role}}</div>
+    <ul class='list-group list-group-flush'>
+      <li class='list-group-item'>Employee ID: ${data.id}</li>
+      <li class='list-group-item'>Email: {{user.email}}</li>
+      {{#each teams as |team|}}
+        <a href='/team/{{team.id}}'>
+          <div class='card-container'>
+            <div class='card' style='width: 18rem'>
+              <div class='card-header'>Name: {{team.team_name}}</div>
+            </div>
+          </div>
+        </a>
+      {{/each}}
+    </ul>
+  </div>
+</div>

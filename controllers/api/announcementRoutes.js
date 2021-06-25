@@ -15,21 +15,18 @@ router.get('/:team_id', withAuth, async (req, res) => {
         },
       ],
     });
-    // const events = announcementData.map((announcement) => announcement.get({ plain: true }));
-    // const team = announcements[0].team.team_name;
-    // res.render('schedule', { team, events, logged_in: req.session.logged_in });
     res.status(200).json(announcementData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.post('/:team_id', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const newAnnouncement = await Announcement.create({
       title: req.body.title,
       message: req.body.message,
-      team_id: req.params.team_id,
+      team_id: req.body.team_id,
     });
 
     res.status(200).json(newAnnouncement);

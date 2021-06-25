@@ -21,12 +21,12 @@ router.get('/:team_id', withAuth, async (req, res) => {
   }
 });
 
-router.post('/:team_id', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const newEvent = await Event.create({
       event_name: req.body.event_name,
       event_date: req.body.event_date,
-      team_id: req.params.team_id,
+      team_id: req.body.team_id,
     });
 
     res.status(200).json(newEvent);

@@ -7,9 +7,9 @@ const eventRoutes = require('./eventRoutes');
 const announcementRoutes = require('./announcementRoutes');
 
 router.use('/users', userRoutes);
-router.use('/projects', roleRoutes);
+router.use('/roles', roleRoutes);
 router.use('/team', teamRoute);
-router.use('/userRole', userRoleRoutes);
+router.use('/userroles', userRoleRoutes);
 router.use('/events', eventRoutes);
 router.use('/announcements', announcementRoutes);
 

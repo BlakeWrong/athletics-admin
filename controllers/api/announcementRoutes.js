@@ -38,4 +38,26 @@ router.post('/:team_id', withAuth, async (req, res) => {
   }
 });
 
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    await Announcement.update(
+      {
+        title: req.body.title,
+        message: req.body.message,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    const editedAnnouncement = await Announcement.findByPk(req.params.id);
+
+    res.status(200).json(editedAnnouncement);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 module.exports = router;

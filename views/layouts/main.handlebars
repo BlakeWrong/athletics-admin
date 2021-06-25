@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+    {{!-- <nav class='navbar navbar-expand-lg navbar-light bg-light'>
       <div class='container-fluid'>
         <a class='navbar-brand' href='#'>Navbar</a>
         <button
@@ -39,18 +39,46 @@
             >Disabled</a> }}
 
             <a class='nav-link active' aria-current='page' href='#'>Home</a>
-            <a class='nav-link' href='#'>Features</a>
-            <a class='nav-link' href='#'>Pricing</a>
+            <a class='nav-link' href='/homepage'>homepage</a>
+            <a class='nav-link' href='/profile'>profile</a>
+            <a class='nav-link' href='/schedule'>schedule</a>
+            <a class='nav-link' href='/team'>team</a>
+            <a class='nav-link' href='/teams'>teams</a>
+            <a class='nav-link' href='/users'>users</a>
             <button class='nav-link' id='logout'>logout</button>
 
           </div>
         </div>
       </div>
-    </nav>
+    </nav> --}}
+
+ <ul class="nav navbar-dark bg-dark justify-content-around">
+  <li class="nav-item">
+   <a class='navbar-brand' aria-current='page' href='/'>Home</a>
+  </li>
+  <li class="nav-item">
+    <a class='navbar-brand' href='/homepage'>homepage</a>
+  </li>
+  <li class="nav-item">
+    <a class='navbar-brand' href='/profile'>profile</a>
+  </li>
+  <li class="nav-item">
+    <a class='navbar-brand' href='/team'>team</a>
+  </li>
+  <li class="nav-item">
+    <a class='navbar-brand' href='/teams'>teams</a>
+  </li>
+   <li class="nav-item">
+     <a class='navbar-brand' href='/users'>users</a>
+  </li>
+     <li class="nav-item">
+     <button class='nav-link' id='logout'>logout</button>
+  </li>
+</ul>
     <div class='flex-column justify-space-around'>
       <header class='display-flex justify-space-between align-center p-2'>
-        <h1>
-          Main Page
+        <h1 class="text-info justify-content-center">
+          <div class='justify-content-center'>Athletics Admin</div>
         </h1>
       </header>
       <main class='container container-fluid mt-5'>

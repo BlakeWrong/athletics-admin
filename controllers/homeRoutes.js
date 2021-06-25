@@ -8,6 +8,7 @@ const {
   UserRole,
 } = require('../models');
 const withAuth = require('../utils/auth');
+const isAdmin = require('../utils/admin');
 
 router.get('/', withAuth, async (req, res) => {
   //route to render home page
@@ -28,7 +29,7 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/admin', withAuth, async (req, res) => {
+router.get('/admin', withAuth, isAdmin, async (req, res) => {
   //route to render admin console
   try {
     const homeUserData = await User.findByPk(req.session.user_id, {
@@ -65,14 +66,76 @@ router.get('/admin', withAuth, async (req, res) => {
   }
 });
 
-router.get('/users', withAuth, async (req, res) => {
+router.get('/users', withAuth, isAdmin, async (req, res) => {
   //route to render all users
   try {
+    const roleData = await Role.findAll({
+      include: [
+        {
+          model: Team,
+        },
+      ],
+    });
+    const teamData = await Team.findAll({
+      include: [
+        {
+          model: Event,
+        },
+        {
+          model: Announcement,
+        },
+        {
+          model: Role,
+          include: [
+            {
+              model: UserRole,
+              include: [
+                {
+                  model: User,
+                  attributes: {
+                    exclude: ['password'],
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    const teams = teamData.map((team) => team.get({ plain: true }));
+    const roles = roleData.map((role) => role.get({ plain: true }));
+    console.log('teams :>> ', teams);
+    console.log('roles :>> ', roles);
     const homeUserData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
     });
     const home_user = homeUserData.get({ plain: true });
+
+    const userData = await User.findAll({
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: UserRole,
+          include: [
+            {
+              model: Role,
+              include: [
+                {
+                  model: Team,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    const users = userData.map((user) => user.get({ plain: true }));
+
     res.render('users', {
+      roles,
+      teams,
+      users,
       home_user,
       is_admin: req.session.is_admin,
       logged_in: req.session.logged_in,
@@ -82,14 +145,42 @@ router.get('/users', withAuth, async (req, res) => {
   }
 });
 
-router.get('/teams', withAuth, async (req, res) => {
+router.get('/teams', withAuth, isAdmin, async (req, res) => {
   //route to render all teams
   try {
+    const teamData = await Team.findAll({
+      include: [
+        {
+          model: Event,
+        },
+        {
+          model: Announcement,
+        },
+        {
+          model: Role,
+          include: [
+            {
+              model: UserRole,
+              include: [
+                {
+                  model: User,
+                  attributes: {
+                    exclude: ['password'],
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    const teams = teamData.map((team) => team.get({ plain: true }));
     const homeUserData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
     });
     const home_user = homeUserData.get({ plain: true });
     res.render('teams', {
+      teams,
       home_user,
       is_admin: req.session.is_admin,
       logged_in: req.session.logged_in,

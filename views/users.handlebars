@@ -1,1 +1,47 @@
+
 <h1>users</h1>
+
+<table class='table'>
+  <thead class='thead-dark'>
+    <tr>
+      <th scope='col'>Username</th>
+      <th scope='col'>First</th>
+      <th scope='col'>Last</th>
+      <th scope='col'>assign to team</th>
+      <th scope='col'>assign to role</th>
+    </tr>
+  </thead>
+  {{#each users as |user|}}
+    <tbody>
+      <tr>
+        <th scope='row'>{{user.username}}</th>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>
+          <form>
+            <select name='nothing' id='nothing'>
+              <option value='none'>Choose a team</option>
+              {{#each ../teams as |team|}}
+              <option value='{{id}}'>{{team_name}}</option>
+              {{/each}}
+            </select>
+          </form>
+        </td>
+        <td>
+            <form>
+                <select name='nothing' id='nothing'>
+                    <option value='none'>Choose a role</option>
+                    {{#each ../roles as |role|}}
+                    <option value=''>{{role.team.team_name}} {{role.title}}</option>
+                    {{/each}}
+                </select>
+            </form>
+        </td>
+
+      </tr>
+    </tbody>
+  {{/each}}
+</table>
+<input type='submit' value='Submit' />
+
+

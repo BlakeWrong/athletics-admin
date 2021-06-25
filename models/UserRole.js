@@ -12,7 +12,7 @@ UserRole.init(
       autoIncrement: true,
     },
     user_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       references: {
         model: 'user',
         key: 'id',
@@ -20,7 +20,7 @@ UserRole.init(
       },
     },
     role_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       references: {
         model: 'role',
         key: 'id',

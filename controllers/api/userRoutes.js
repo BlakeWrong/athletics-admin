@@ -143,4 +143,32 @@ router.get('/:id', withAuth, async (req, res) => {
   }
 });
 
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    await User.update(
+      {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+        username: req.body.username,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    const editedUser = await User.findByPk(req.params.id, {
+      attributes: {
+        exclude: ['password'],
+      },
+    });
+
+    res.status(200).json(editedUser);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 module.exports = router;

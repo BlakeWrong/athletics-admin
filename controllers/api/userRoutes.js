@@ -67,10 +67,16 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      const teams = user.user_roles.map((userRole) => {
+      const role_ids = user.user_roles.map((userRole) => {
+        return userRole.role.id;
+      });
+      req.session.is_admin = role_ids.includes(3);
+      let teams = user.user_roles.map((userRole) => {
         return userRole.role.team;
       });
+      teams = teams.filter(Boolean);
       req.session.teams = teams;
+      console.log('teams :>> ', teams);
       const { password, ...userResponse } = user;
       res.json({
         user: userResponse,

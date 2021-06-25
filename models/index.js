@@ -5,18 +5,39 @@ const UserRole = require('./UserRole');
 const Event = require('./Event');
 const Announcement = require('./Announcement');
 
-User.belongsToMany(Role, {
-  through: {
-    model: UserRole,
-    unique: false,
-  },
+// User.belongsToMany(Role, {
+//   through: {
+//     model: UserRole,
+//     foreignKey: 'role_id',
+//     unique: false,
+//   },
+// });
+// Role.belongsToMany(User, {
+//   through: {
+//     model: UserRole,
+//     foreignKey: 'user_id',
+//     unique: false,
+//   },
+// });
+
+User.hasMany(UserRole, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
 });
 
-Role.belongsToMany(User, {
-  through: {
-    model: UserRole,
-    unique: false,
-  },
+UserRole.belongsTo(Role, {
+  foreignKey: 'role_id',
+  onDelete: 'CASCADE',
+});
+
+Role.hasMany(UserRole, {
+  foreignKey: 'role_id',
+  onDelete: 'CASCADE',
+});
+
+UserRole.belongsTo(User, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
 });
 
 Role.belongsTo(Team, {

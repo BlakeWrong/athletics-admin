@@ -5,7 +5,13 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, async (req, res) => {
   //route to render home page
   try {
+    const homeUserData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+    const home_user = homeUserData.get({ plain: true });
     res.render('homepage', {
+      home_user,
+      my_teams: req.session.teams,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -62,7 +68,7 @@ router.get('/teams/:id', withAuth, async (req, res) => {
 
     const team = teamData.get({ plain: true });
 
-    res.render('teams', {
+    res.render('team', {
       team,
       logged_in: req.session.logged_in,
     });

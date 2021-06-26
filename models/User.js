@@ -5,7 +5,7 @@ const sequelize = require('../config/connection');
 class User extends Model {
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
-  };
+  }
   fullName() {
     return this.first_name + ' ' + this.last_name;
   }
@@ -47,20 +47,6 @@ User.init(
         len: [8],
       },
     },
-    role_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'role',
-        key: 'id',
-      },
-    },
-    team_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'team',
-        key: 'id',
-      },
-    },
   },
   {
     hooks: {
@@ -69,7 +55,10 @@ User.init(
         return newUserData;
       },
       beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        updatedUserData.password = await bcrypt.hash(
+          updatedUserData.password,
+          10
+        );
         return updatedUserData;
       },
     },

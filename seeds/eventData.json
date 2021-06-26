@@ -1,0 +1,102 @@
+[
+  {
+    "event_name": "Practice",
+    "event_date": "07/06/2021 19:30:00",
+    "team_id": "1"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/06/2021 19:30:00",
+    "team_id": "2"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/06/2021 19:30:00",
+    "team_id": "3"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/06/2021 19:30:00",
+    "team_id": "4"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/13/2021 19:30:00",
+    "team_id": "1"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/13/2021 19:30:00",
+    "team_id": "2"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/13/2021 19:30:00",
+    "team_id": "3"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/13/2021 19:30:00",
+    "team_id": "4"
+  },
+  {
+    "event_name": "Game 1",
+    "event_date": "07/16/2021 18:00:00",
+    "team_id": "1"
+  },
+  {
+    "event_name": "Game 1",
+    "event_date": "07/16/2021 18:00:00",
+    "team_id": "2"
+  },
+  {
+    "event_name": "Game 1",
+    "event_date": "07/16/2021 20:00:00",
+    "team_id": "3"
+  },
+  {
+    "event_name": "Game 1",
+    "event_date": "07/16/2021 20:00:00",
+    "team_id": "4"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/20/2021 19:30:00",
+    "team_id": "1"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/20/2021 19:30:00",
+    "team_id": "2"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/20/2021 19:30:00",
+    "team_id": "3"
+  },
+  {
+    "event_name": "Practice",
+    "event_date": "07/20/2021 19:30:00",
+    "team_id": "4"
+  },
+  {
+    "event_name": "Game 2",
+    "event_date": "07/22/2021 18:00:00",
+    "team_id": "1"
+  },
+  {
+    "event_name": "Game 2",
+    "event_date": "07/22/2021 18:00:00",
+    "team_id": "3"
+  },
+  {
+    "event_name": "Game 2",
+    "event_date": "07/22/2021 20:00:00",
+    "team_id": "2"
+  },
+  {
+    "event_name": "Game 2",
+    "event_date": "07/22/2021 20:00:00",
+    "team_id": "4"
+  }
+]

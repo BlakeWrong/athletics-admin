@@ -1,48 +1,51 @@
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {{name}}!</h2>
-  </div>
-</div>
-
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Create a New Project:</h3>
-
-    <form class="form new-project-form">
-      <div class="form-group">
-        <label for="project-name">project name:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
-      </div>
-      <div class="form-group">
-        <label for="project-funding">needed funding ($):</label>
-        <input class="form-input" type="number" id="project-funding" name="project-funding" />
-      </div>
-      <div class="form-group">
-        <label for="project-desc">description:</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
-  </div>
-
-  {{#if projects.length}}
-  <div class="col-md-6 project-list">
-    <h3>Current Projects:</h3>
-
-    {{#each projects as |project|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/project/{{project.id}}">{{project.name}}</a></h4>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{project.id}}">DELETE</button>
+<h1>{{user.username}} Profile</h1>
+<div class='page-content page-container' id='page-content'>
+  <div class='padding'>
+    <div class='row container d-flex justify-content-center'>
+      <div class='col-xl-6 col-md-12'>
+        <div class='card user-card-full'>
+          <div class='row m-l-0 m-r-0'>
+            <div class='col-sm-4 bg-c-lite-green user-profile'>
+              <div class='card-block text-center text-white'>
+                <div class='m-b-25'>
+                  <img
+                    src='https://img.icons8.com/bubbles/100/000000/user.png'
+                    class='img-radius'
+                    alt='User-Profile-Image'
+                  />
+                </div>
+                <h6 class='f-w-600 capitalize'>{{user.first_name}}
+                  {{user.last_name}}</h6>
+                <i
+                  class='mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16'
+                ></i>
+              </div>
+            </div>
+            <div class='col-sm-8'>
+              <div class='card-block'>
+                <h6 class='m-b-20 p-b-5 b-b-default f-w-600'>Information</h6>
+                <div class='row'>
+                  <div class='col-sm-8'>
+                    <p class='m-b-10 f-w-600'>Email</p>
+                    <h6 class='text-muted f-w-400'>{{user.email}}</h6>
+                  </div>
+                  <div class='col-sm-6'>
+                    <p class='m-b-10 f-w-600'>Username</p>
+                    <h6 class='text-muted f-w-400'>{{user.username}}</h6>
+                  </div>
+                </div>
+                <h6 class='m-b-20 m-t-40 p-b-5 b-b-default f-w-600'>Teams</h6>
+                <div class='row'>
+                  <div class='col-sm-6'>
+                    <p class='m-b-10 f-w-600'>{{#each user.user_roles as |userrole|}}</p>
+                    <h6 class='text-muted f-w-400'>{{userrole.role.team.team_name}} {{userrole.role.title}}</h6>{{/each}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    {{/each}}
   </div>
-  {{/if}}
 </div>
-
-<script src="./js/profile.js"></script>

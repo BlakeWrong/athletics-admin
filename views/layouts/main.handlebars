@@ -1,44 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fund My Project!</title>
-  <link rel="stylesheet" href="/css/jass.css">
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>MyTeam</title>
+    <link
+      rel='stylesheet'
+      href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
+      integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T'
+      crossorigin='anonymous'
+    />
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
 
-<body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <span role="img" aria-label="money">💸</span>
-        <a href="/">Fund My Project!</a>
+  <body>
+    {{!-- <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+      <div class='container-fluid'>
+        <a class='navbar-brand' href='#'>Navbar</a>
+        <button
+          class='navbar-toggler'
+          type='button'
+          data-bs-toggle='collapse'
+          data-bs-target='#navbarNavAltMarkup'
+          aria-controls='navbarNavAltMarkup'
+          aria-expanded='false'
+          aria-label='Toggle navigation'
+        >
+          <span class='navbar-toggler-icon'></span>
+        </button>
+        <div class='collapse navbar-collapse' id='navbarNavAltMarkup'>
+          <div class='navbar-nav'>
+
+            {{! <a
+              class='nav-link disabled'
+              href='#'
+              tabindex='-1'
+              aria-disabled='true'
+            >Disabled</a> }}
+
+            <a class='nav-link active' aria-current='page' href='#'>Home</a>
+            <a class='nav-link' href='/homepage'>homepage</a>
+            <a class='nav-link' href='/profile'>profile</a>
+            <a class='nav-link' href='/schedule'>schedule</a>
+            <a class='nav-link' href='/team'>team</a>
+            <a class='nav-link' href='/teams'>teams</a>
+            <a class='nav-link' href='/users'>users</a>
+            <button class='nav-link' id='logout'>logout</button>
+
+          </div>
+        </div>
+      </div>
+    </nav> --}}
+    <header class='display-flex justify-space-between align-center p-2'>
+      <h1 class='text-info justify-content-center'>
+        <div class='justify-content-center'>MyTeam</div>
       </h1>
-      <nav>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/profile">profile</a> |
-        <button class="no-button" id="logout">logout</button>
-        {{else}}
-        <a href="/login">login</a>
-        {{/if}}
-      </nav>
     </header>
-    <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      
-    </footer>
-  </div>
+    <ul class='nav navbar-dark bg-dark justify-content-around'>
+      <li class='nav-item'>
+        <a class='navbar-brand' aria-current='page' href='/'>Home</a>
+      </li>
+      <li class='nav-item'>
+        <a class='navbar-brand' href='/user/{{home_user.username}}'>Profile</a>
+      </li>
+      {{#if is_admin}}
+        <li class='nav-item'>
+          <a class='navbar-brand' href='/admin'>Admin Dashboard</a>
+        </li>
+      {{/if}}
+      <li class='nav-item'>
+        <button class='nav-link' id='logout'>Logout</button>
+      </li>
+    </ul>
+    <div class='flex-column justify-space-around'>
 
-  <!-- Render script for logged in users only -->
-  {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
-</body>
+      <main class='container container-fluid mt-5'>
+        {{{body}}}
+      </main>
+      <footer>
+      </footer>
+    </div>
+
+    <script src='/js/logout.js'></script>
+  </body>
 
 </html>

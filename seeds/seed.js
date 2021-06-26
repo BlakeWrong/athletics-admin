@@ -1,22 +1,50 @@
 const sequelize = require('../config/connection');
-const { User, Project } = require('../models');
+const {
+  User,
+  Team,
+  Role,
+  UserRole,
+  Event,
+  Announcement,
+} = require('../models');
 
 const userData = require('./userData.json');
-const projectData = require('./projectData.json');
+const roleData = require('./roleData.json');
+const teamData = require('./teamData.json');
+const userRoleData = require('./userRoleData.json');
+const eventData = require('./eventData.json');
+const announcement = require('./announcement.json');
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });
+  try {
+    await sequelize.sync({ force: true });
 
-  const users = await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
-  });
-
-  for (const project of projectData) {
-    await Project.create({
-      ...project,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
+    await User.bulkCreate(userData, {
+      individualHooks: true,
+      returning: true,
     });
+    await Team.bulkCreate(teamData, {
+      individualHooks: true,
+      returning: true,
+    });
+    await Role.bulkCreate(roleData, {
+      individualHooks: true,
+      returning: true,
+    });
+    await UserRole.bulkCreate(userRoleData, {
+      individualHooks: true,
+      returning: true,
+    });
+    await Event.bulkCreate(eventData, {
+      individualHooks: true,
+      returning: true,
+    });
+    await Announcement.bulkCreate(announcement, {
+      individualHooks: true,
+      returning: true,
+    });
+  } catch (err) {
+    console.log(err);
   }
 
   process.exit(0);

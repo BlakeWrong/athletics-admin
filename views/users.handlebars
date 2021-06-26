@@ -1,0 +1,41 @@
+
+<h1>users</h1>
+
+<table class='table'>
+  <thead class='thead-dark'>
+    <tr>
+      <th scope='col'>Username</th>
+      <th scope='col'>First</th>
+      <th scope='col'>Last</th>
+      <th scope='col'>assign to role</th>
+      <th scope='col'>submit</th>
+    </tr>
+  </thead>
+    <tbody id="roleTable">
+  {{#each users as |user|}}
+      <tr id="{{id}}">
+        <th scope='row'><a href="/user/{{user.username}}">{{user.username}}</a> </th>
+        <td class="capitalize">{{user.first_name}}</td>
+        <td class="capitalize">{{user.last_name}}</td>
+            <form>
+        <td>
+                <select name='role_id' id='userRole_{{id}}'>
+                    <option value='none'>Choose a role</option>
+                    {{#each ../roles as |role|}}
+                    <option id="{{role.id}}" class="option" value='{{role.id}}'>{{role.team.team_name}} {{role.title}}</option>
+                    {{/each}}
+                </select>
+        </td>
+        <td>
+          <input type='submit' value='Submit' class='submit-btn' id="submit-{{id}}" data-user="{{id}}" data-value="userRole_{{id}}"/>
+        </td>
+            </form>
+      </tr>
+  {{/each}}
+    </tbody>
+</table>
+
+
+<script src='/js/userRole.js'></script>
+
+

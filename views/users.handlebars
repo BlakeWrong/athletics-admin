@@ -14,7 +14,7 @@
     <tbody id="roleTable">
   {{#each users as |user|}}
       <tr id="{{id}}">
-        <th scope='row'>{{user.username}}</th>
+        <th scope='row'><a href="/user/{{user.username}}">{{user.username}}</a> </th>
         <td class="capitalize">{{user.first_name}}</td>
         <td class="capitalize">{{user.last_name}}</td>
             <form>

@@ -49,7 +49,7 @@ const newEventHandler = async (event) => {
     });
 
     if (response.ok) {
-      //   document.location.reload();
+      document.location.reload();
     } else {
       alert(response.statusText);
       alert('Failed to create event');

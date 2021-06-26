@@ -11,6 +11,12 @@ const editUserRole = async (user, role) => {
         'Content-Type': 'application/json',
       },
     });
+    if (response.ok) {
+      console.log('response :>> ', response);
+      document.location.reload();
+    } else {
+      alert('Failed to assign role');
+    }
   }
 };
 
@@ -18,7 +24,7 @@ if (document.querySelector('#roleTable')) {
   document
     .querySelector('#roleTable')
     .addEventListener('click', function (event) {
-      event.preventDefault();
+      // event.preventDefault();
       if (event.target.value === 'Submit') {
         const btnId = event.target.id;
         const btn = document.getElementById(btnId);

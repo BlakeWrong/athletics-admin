@@ -1,4 +1,3 @@
-<h1>My Teams</h1>
 {{!-- {{#each my_teams as |team|}}
   <a href='/team/{{team.id}}'>
     <div class='card-container'>
@@ -12,16 +11,27 @@
   </a>
 {{/each}} --}}
 
-{{#each user.user_roles as |userrole|}}
-  <a href='/team/{{userrole.role.team.id}}'>
-    <div class='card-container'>
-      <div
-        class='border border-info card text-white bg-dark'
-        style='width: 18rem'
-      >
-        <div class='card-header'>{{userrole.role.team.team_name}}:
-          {{userrole.role.title}}</div>
+{{#if is_admin}}
+  <h1>You are logged in as admin</h1>
+  <p>As admin, you can assign roles to users, create teams, and create
+    events/announcements</p>
+  <br />
+  <p>To use admin abilities just go to your admin dashboard</p>
+{{/if}}
+
+{{#unless is_admin}}
+  <h1>My Teams</h1>
+  {{#each user.user_roles as |userrole|}}
+    <a href='/team/{{userrole.role.team.id}}'>
+      <div class='card-container'>
+        <div
+          class='border border-info card text-white bg-dark'
+          style='width: 18rem'
+        >
+          <div class='card-header'>{{userrole.role.team.team_name}}:
+            {{userrole.role.title}}</div>
+        </div>
       </div>
-    </div>
-  </a>
-{{/each}}
+    </a>
+  {{/each}}
+{{/unless}}

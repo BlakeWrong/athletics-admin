@@ -13,12 +13,31 @@ const isAdmin = require('../utils/admin');
 router.get('/', withAuth, async (req, res) => {
   //route to render home page
   try {
+    const userData = await User.findByPk(req.session.user_id, {
+      include: [
+        {
+          model: UserRole,
+          include: [
+            {
+              model: Role,
+              include: [
+                {
+                  model: Team,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    const user = userData.get({ plain: true });
     const homeUserData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
     });
     const home_user = homeUserData.get({ plain: true });
     console.log('req.session.teams :>> ', req.session.teams);
     res.render('homepage', {
+      user,
       is_admin: req.session.is_admin,
       home_user,
       my_teams: req.session.teams,

@@ -44,7 +44,11 @@ router.post('/', withAuth, async (req, res) => {
       ],
     });
 
-    const assignmentEmail = `You have been assigned the role of ${teamData.title} on the team ${teamData.team.team_name}!`;
+    const assignmentEmail = `
+    <h3>Hello ${userData.first_name},</h3>
+    <p>You have been assigned the role of ${teamData.title} on the team ${teamData.team.team_name}!</p>
+    <p>To view your team's page go to <a href="https://abc-myteam.herokuapp.com/login">abc-myteam</a> and login.</p>
+    `;
 
     let transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -67,7 +71,7 @@ router.post('/', withAuth, async (req, res) => {
 
     console.log('Message sent: %s', info.messageId);
 
-    res.status(200).json({ message: assignmentEmail });
+    res.status(200).json(newUserRole);
   } catch (err) {
     console.error(err);
     res.status(400).json(err);

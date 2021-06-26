@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
       const role_ids = user.user_roles.map((userRole) => {
         return userRole.role.id;
       });
-      req.session.is_admin = role_ids.includes(3);
+      req.session.is_admin = role_ids.includes(1);
       let teams = user.user_roles.map((userRole) => {
         return userRole.role.team;
       });

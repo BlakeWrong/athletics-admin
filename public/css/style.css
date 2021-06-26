@@ -40,6 +40,13 @@ header,
 body {
   background-color: #f9f9fa;
 }
+img {
+  max-width: 300px;
+  align-items: center;
+}
+.center {
+  justify-content: center;
+}
 
 .padding {
   padding: 3rem !important;
@@ -95,9 +102,16 @@ body {
 .img-radius {
   border-radius: 5px;
 }
+.img-radius {
+  border-radius: 5px;
+}
 
 h6 {
   font-size: 14px;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .card .card-block p {

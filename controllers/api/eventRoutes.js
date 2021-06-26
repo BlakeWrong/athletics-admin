@@ -2,6 +2,22 @@ const router = require('express').Router();
 const { Event, Team } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+router.get('/', withAuth, async (req, res) => {
+  try {
+    const eventData = await Event.findAll({
+      include: [
+        {
+          model: Team,
+          attributes: ['team_name'],
+        },
+      ],
+    });
+    res.status(200).json(eventData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/:team_id', withAuth, async (req, res) => {
   try {
     const eventData = await Event.findAll({

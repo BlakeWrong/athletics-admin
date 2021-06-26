@@ -1,8 +1,30 @@
 <h1>{{team.team_name}} Home</h1>
+
+
+
 <div class='container'>
   <div class='row'>
     <div class='col-sm'>
       <h4>Events</h4>
+      {{#if is_admin}}
+        <form class='form new-event-form col-6' data-team-id="{{team.id}}">
+          <div class='form-group'>
+            <label class='' for='event-name'>Event Name:</label>
+            <input class='form-control' type='text' id='event-name' name='event-name' />
+          </div>
+          <div class='form-group'>
+            <label class='' for='event-date'>Event Date:</label>
+            <input class='form-control' type='date' id='event-date' name='event-date' />
+          </div>
+          <div class='form-group'>
+            <label class='' for='event-time'>Event Time:</label>
+            <input class='form-control' type='time' id='event-time' name='event-time' />
+          </div>
+          <div class='form-group'>
+            <button type='submit' class='btn btn-primary'>Create</button>
+          </div>
+        </form>
+      {{/if}}
       <div class='list-group'>
         {{#each team.events as |event|}}
     <div class="d-flex w-100 justify-content-between card">
@@ -19,6 +41,21 @@
     </div>
     <div class='col-sm'>
       <h4>Announcements</h4>
+      {{#if is_admin}}
+        <form class='form new-announcement-form col-6' data-team-id="{{team.id}}">
+          <div class='form-group'>
+            <label class='' for='announcement-title'>Announcement Title:</label>
+            <input class='form-control' type='text' id='announcement-title' name='announcement-title' />
+          </div>
+          <div class='form-group'>
+            <label class='' for='announcement-message'>Announcement Message:</label>
+            <input class='form-control' type='text' id='announcement-message' name='announcement-message' />
+          </div>
+          <div class='form-group'>
+            <button type='submit' class='btn btn-primary'>Create</button>
+          </div>
+        </form>
+      {{/if}}
       <div class="list-group">
       {{#each team.announcements as |announcement|}}
       <div class="card">
@@ -32,3 +69,5 @@
     </div>
   </div>
 </div>
+
+<script src="/js/team.js"></script>

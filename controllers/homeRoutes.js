@@ -260,6 +260,23 @@ router.get('/user/:username', withAuth, async (req, res) => {
   }
 });
 
+router.get('/newteam', withAuth, isAdmin, async (req, res) => {
+  //route to render user profile
+  try {
+    const homeUserData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+    const home_user = homeUserData.get({ plain: true });
+    res.render('newteam', {
+      home_user,
+      is_admin: req.session.is_admin,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/schedule', withAuth, async (req, res) => {
   //route to render user profile
   try {

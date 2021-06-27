@@ -1,37 +1,5 @@
 [
   {
-    "title": "Admin"
-  },
-  {
-    "title": "Coach",
-    "team_id": "1"
-  },
-  {
-    "title": "Player",
-    "team_id": "1"
-  },
-  {
-    "title": "Coach",
-    "team_id": "2"
-  },
-  {
-    "title": "Player",
-    "team_id": "2"
-  },
-  {
-    "title": "Coach",
-    "team_id": "3"
-  },
-  {
-    "title": "Player",
-    "team_id": "3"
-  },
-  {
-    "title": "Coach",
-    "team_id": "4"
-  },
-  {
-    "title": "Player",
-    "team_id": "4"
+    "title": "is_admin"
   }
 ]

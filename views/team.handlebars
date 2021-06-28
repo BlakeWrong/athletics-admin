@@ -1,5 +1,32 @@
 <h1>{{team.team_name}} Homepage</h1>
 
+<h1 class="mt-3 mb-3">Team Roster</h1>
+
+<table class='table mt-3 mb-3'>
+  <thead class='thead-dark'>
+    <tr>
+      <th scope='col'>First</th>
+      <th scope='col'>Last</th>
+      <th scope='col'>Role</th>
+    </tr>
+  </thead>
+    <tbody>
+  {{#each coaches as |coach|}}
+      <tr>
+        <td class="capitalize" scope='row'>{{coach.user.first_name}}</td>
+        <td class="capitalize">{{coach.user.last_name}}</td>
+        <td class="capitalize">Coach</td>
+      </tr>
+  {{/each}}
+  {{#each players as |player|}}
+      <tr>
+        <td class="capitalize" scope='row'>{{player.user.first_name}}</td>
+        <td class="capitalize">{{player.user.last_name}}</td>
+        <td class="capitalize">Player</td>
+      </tr>
+  {{/each}}
+    </tbody>
+</table>
 
 
 <div class='container'>

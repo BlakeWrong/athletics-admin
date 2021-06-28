@@ -18,7 +18,7 @@
             <form>
         <td>
                 <select name='role_id' id='userRole_{{id}}'>
-                    <option value='none'>Choose a role</option>
+                    <option value=''>Choose a role</option>
                     {{#each ../roles as |role|}}
                     <option id="{{role.id}}" class="option" value='{{role.id}}'>{{role.team.team_name}} {{role.title}}</option>
                     {{/each}}

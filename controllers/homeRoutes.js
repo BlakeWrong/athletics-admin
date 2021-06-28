@@ -247,7 +247,28 @@ router.get('/team/:id', withAuth, async (req, res) => {
       ],
     });
 
+    const userData = await User.findAll({
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: UserRole,
+          include: [
+            {
+              model: Role,
+              include: [
+                {
+                  model: Team,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    const users = userData.map((user) => user.get({ plain: true }));
+
     const team = teamData.get({ plain: true, nest: true });
+    console.log('team :>> ', team);
 
     const roles = team.roles.map((role) => role);
 
@@ -255,10 +276,20 @@ router.get('/team/:id', withAuth, async (req, res) => {
       return role.user_roles;
     });
 
+    const player_role_id = team.roles[0].id;
+
     const players = teamUsers[0];
     const coaches = teamUsers[1];
+    console.log('coaches :>> ', coaches);
+    const isCoach = coaches.some(
+      (coach) => coach.user.id === req.session.user_id
+    );
+    console.log('is_coach :>> ', isCoach);
 
     res.render('team', {
+      player_role_id,
+      users,
+      is_coach: isCoach,
       coaches,
       players,
       home_user,

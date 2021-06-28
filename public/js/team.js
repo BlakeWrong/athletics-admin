@@ -56,6 +56,37 @@ const newEventHandler = async (event) => {
     }
   }
 };
+const newTeamPlayerHandler = async (event) => {
+  event.preventDefault();
+
+  const sel = document.getElementById('get-user');
+  const user_id = parseInt(sel.value);
+  const role_id = parseInt(sel.getAttribute('data-player-value'));
+
+  console.log('user_id :>> ', user_id);
+  console.log('role_id :>> ', role_id);
+
+  console.log('typeof user_id :>> ', typeof user_id);
+  console.log('typeof role_id :>> ', typeof role_id);
+
+  if (user_id && role_id) {
+    const response = await fetch(`/api/userroles`, {
+      method: 'POST',
+      body: JSON.stringify({ user_id, role_id }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      document.location.reload();
+      console.log('success!');
+    } else {
+      alert(response.statusText);
+      alert('Failed to create event');
+    }
+  }
+};
 
 const newAnnouncementHandler = async (event) => {
   event.preventDefault();
@@ -98,4 +129,10 @@ if (document.querySelector('.new-announcement-form')) {
   document
     .querySelector('.new-announcement-form')
     .addEventListener('submit', newAnnouncementHandler);
+}
+
+if (document.querySelector('.new-team-player-form')) {
+  document
+    .querySelector('.new-team-player-form')
+    .addEventListener('submit', newTeamPlayerHandler);
 }

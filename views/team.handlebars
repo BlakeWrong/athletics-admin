@@ -28,6 +28,22 @@
     </tbody>
 </table>
 
+{{#if is_coach}}
+<h2>Add a player to the roster</h2>
+<form class="new-team-player-form">
+  <td>
+      <select id="get-user" class="capitalize" name='get-user' data-player-value="{{player_role_id}}">
+        <option class="capitalize" value=''>Choose a player</option>
+        {{#each users as |user|}}
+        <option class="capitalize option" value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>
+        {{/each}}      
+      </select>
+  </td>
+  <td>
+    <input type='submit' value='Submit' class='btn btn-primary btn-sm' data-user="{{player_role_id}}"/>
+  </td>
+</form>
+{{/if}}
 
 <div class='container'>
   <div class='row'>

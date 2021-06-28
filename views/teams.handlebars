@@ -1,11 +1,15 @@
 <h1>Admin View:</h1>
-<button class='btn btn-primary btn-lg'>
-  <a href='/newteam'>Create new Team +</a></button>
+<button
+  class='btn btn-success btn-lg text-light'
+  style='text-decoration: none;'
+>
+  <a href='/newteam' class='text-light' style='text-decoration: none;'>Create
+    new Team +</a></button>
 <br /><br />
 {{#each teams as |team|}}
   <br />
   <a href='/team/{{team.id}}'><button
       type='button'
-      class='btn btn-primary btn-lg'
+      class='btn btn-primary btn-lg mb-2'
     >Name: {{team.team_name}}</button></a>
 {{/each}}

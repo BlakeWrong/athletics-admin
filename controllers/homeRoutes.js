@@ -222,15 +222,45 @@ router.get('/team/:id', withAuth, async (req, res) => {
           model: Event,
         },
         {
+          model: Role,
+          plain: true,
+          nest: true,
+          include: [
+            {
+              model: UserRole,
+              plain: true,
+              nest: true,
+              include: [
+                {
+                  model: User,
+                  attributes: {
+                    exclude: ['password'],
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
           model: Announcement,
         },
       ],
     });
 
-    const team = teamData.get({ plain: true });
-    console.log('team :>> ', team);
+    const team = teamData.get({ plain: true, nest: true });
+
+    const roles = team.roles.map((role) => role);
+
+    const teamUsers = roles.map((role) => {
+      return role.user_roles;
+    });
+
+    const players = teamUsers[0];
+    const coaches = teamUsers[1];
 
     res.render('team', {
+      coaches,
+      players,
       home_user,
       is_admin: req.session.is_admin,
       team,

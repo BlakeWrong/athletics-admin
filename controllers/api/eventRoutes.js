@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Event, Team } = require('../../models');
 const withAuth = require('../../utils/auth');
-const { Op } = require('sequelize');
 
 router.get('/', withAuth, async (req, res) => {
   try {
@@ -21,13 +20,9 @@ router.get('/', withAuth, async (req, res) => {
 
 router.get('/:team_id', withAuth, async (req, res) => {
   try {
-    const current = new Date();
     const eventData = await Event.findAll({
       where: {
         team_id: req.params.team_id,
-        event_date: {
-          [Op.gte]: current,
-        },
       },
       include: [
         {
@@ -36,9 +31,6 @@ router.get('/:team_id', withAuth, async (req, res) => {
         },
       ],
     });
-
-    eventData.sort((a, b) => a.event_date - b.event_date);
-
     res.status(200).json(eventData);
   } catch (err) {
     res.status(500).json(err);

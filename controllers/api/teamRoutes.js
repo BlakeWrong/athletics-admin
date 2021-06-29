@@ -66,8 +66,6 @@ router.get('/:id', withAuth, async (req, res) => {
         },
       ],
     });
-
-    teamData.events.sort((a, b) => a.event_date - b.event_date);
     res.status(200).json(teamData);
   } catch (err) {
     res.status(500).json(err);

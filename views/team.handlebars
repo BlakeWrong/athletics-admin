@@ -124,5 +124,10 @@
     </div>
   </div>
 </div>
+<br><br>
+{{#if is_admin}}
+<button class="mb-5 btn btn-lg btn-danger delete-team-button" data-team-id="{{team.id}}">Delete Team</button>
+<br><br>
+{{/if}}
 
 <script src="/js/team.js"></script>

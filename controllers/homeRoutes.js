@@ -222,15 +222,83 @@ router.get('/team/:id', withAuth, async (req, res) => {
           model: Event,
         },
         {
+          model: Role,
+          plain: true,
+          nest: true,
+          include: [
+            {
+              model: UserRole,
+              plain: true,
+              nest: true,
+              include: [
+                {
+                  model: User,
+                  attributes: {
+                    exclude: ['password'],
+                  },
+                },
+                {
+                  model: Role,
+                },
+              ],
+            },
+          ],
+        },
+        {
           model: Announcement,
         },
       ],
     });
 
-    const team = teamData.get({ plain: true });
-    console.log('team :>> ', team);
+    const userData = await User.findAll({
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: UserRole,
+          include: [
+            {
+              model: Role,
+              include: [
+                {
+                  model: Team,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    const users = userData.map((user) => user.get({ plain: true }));
+
+    const team = teamData.get({ plain: true, nest: true });
+
+    const roles = team.roles.map((role) => role);
+
+    const playerArray = roles.filter((role) => role.title === 'Player');
+    const coachArray = roles.filter((role) => role.title === 'Coach');
+
+    const players = playerArray.map((role) => {
+      return role.user_roles;
+    })[0];
+    const coaches = coachArray.map((role) => {
+      return role.user_roles;
+    })[0];
+
+    const player_role_id = team.roles.find(
+      (role) => role.title === 'Player'
+    ).id;
+
+    const isCoach = coaches.some(
+      (coach) => coach.user.id === req.session.user_id
+    );
+    console.log('is_coach :>> ', isCoach);
 
     res.render('team', {
+      player_role_id,
+      users,
+      is_coach: isCoach,
+      coaches,
+      players,
       home_user,
       is_admin: req.session.is_admin,
       team,

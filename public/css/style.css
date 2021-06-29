@@ -82,10 +82,10 @@ img {
     linear,
     left top,
     right top,
-    from(#f29263),
-    to(#ee5a6f)
+    from(#43cea2),
+    to(#185a9d)
   );
-  background: linear-gradient(to right, #ee5a6f, #f29263);
+  background: linear-gradient(to right, #43cea2, #185a9d);
 }
 
 .user-profile {

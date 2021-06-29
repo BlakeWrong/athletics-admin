@@ -15,8 +15,7 @@
   <h1>You are logged in as admin</h1>
   <p>As admin, you can assign roles to users, create teams, and create
     events/announcements</p>
-  <br />
-  <p>To use admin abilities just go to your admin dashboard</p>
+  <p>To use admin abilities, go to your admin dashboard</p>
 {{/if}}
 
 {{#unless is_admin}}
@@ -28,8 +27,8 @@
           class='border border-info card text-white bg-dark'
           style='width: 18rem'
         >
-          <div class='card-header'>{{userrole.role.team.team_name}}:
-            {{userrole.role.title}}</div>
+          <div class='card-header'>{{userrole.role.team.team_name}}
+            ({{userrole.role.title}})</div>
         </div>
       </div>
     </a>

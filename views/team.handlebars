@@ -61,7 +61,7 @@
   <div class='row'>
     <div class='col-sm'>
       <h4>Events</h4>
-      {{#if is_admin}}
+      {{#if is_coach_or_admin}}
         <form class='form new-event-form col-6' data-team-id="{{team.id}}">
           <div class='form-group'>
             <label class='' for='event-name'>Event Name:</label>
@@ -96,7 +96,7 @@
     </div>
     <div class='col-sm'>
       <h4>Announcements</h4>
-      {{#if is_admin}}
+      {{#if is_coach_or_admin}}
         <form class='form new-announcement-form col-6' data-team-id="{{team.id}}">
           <div class='form-group'>
             <label class='' for='announcement-title'>Announcement Title:</label>

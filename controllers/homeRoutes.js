@@ -294,9 +294,12 @@ router.get('/team/:id', withAuth, async (req, res) => {
     const isCoach = coaches.some(
       (coach) => coach.user.id === req.session.user_id
     );
-    console.log('is_coach :>> ', isCoach);
+
+    const isCoachOrAdmin = isCoach || req.session.is_admin;
+    console.log('isCoachOrAdmin :>> ', isCoachOrAdmin);
 
     res.render('team', {
+      is_coach_or_admin: isCoachOrAdmin,
       player_role_id,
       users,
       is_coach: isCoach,

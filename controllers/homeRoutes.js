@@ -284,6 +284,9 @@ router.get('/team/:id', withAuth, async (req, res) => {
       return role.user_roles;
     })[0];
 
+    console.log('coaches :>> ', coaches);
+    console.log('players :>> ', players);
+
     const player_role_id = team.roles.find(
       (role) => role.title === 'Player'
     ).id;

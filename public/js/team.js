@@ -113,6 +113,31 @@ const newAnnouncementHandler = async (event) => {
   }
 };
 
+const removeFromTeamHandler = async (event) => {
+  event.preventDefault();
+
+  console.log('event :>> ', event.submitter);
+
+  const submitter = event.submitter;
+
+  const userId = submitter.getAttribute('data-user-id');
+  const teamId = submitter.getAttribute('data-team-id');
+  const userRoleId = submitter.getAttribute('data-user-role-id');
+
+  if (userRoleId) {
+    const response = await fetch(`/api/userroles/${userRoleId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      document.location.reload();
+    } else {
+      alert(response.statusText);
+      alert('Failed to remove user');
+    }
+  }
+};
+
 if (document.querySelector('.new-team-form')) {
   document
     .querySelector('.new-team-form')
@@ -135,4 +160,10 @@ if (document.querySelector('.new-team-player-form')) {
   document
     .querySelector('.new-team-player-form')
     .addEventListener('submit', newTeamPlayerHandler);
+}
+
+if (document.querySelector('.remove-from-team-form')) {
+  document
+    .querySelector('.remove-from-team-form')
+    .addEventListener('submit', removeFromTeamHandler);
 }

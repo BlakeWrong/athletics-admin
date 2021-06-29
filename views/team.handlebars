@@ -8,23 +8,35 @@
       <th scope='col'>First</th>
       <th scope='col'>Last</th>
       <th scope='col'>Role</th>
+      {{#if is_coach}}
+      <th scope="col">Remove From Team</th>
+      {{/if}}    
     </tr>
   </thead>
     <tbody>
-  {{#each coaches as |coach|}}
-      <tr>
-        <td class="capitalize" scope='row'>{{coach.user.first_name}}</td>
-        <td class="capitalize">{{coach.user.last_name}}</td>
-        <td class="capitalize">Coach</td>
-      </tr>
-  {{/each}}
-  {{#each players as |player|}}
-      <tr>
-        <td class="capitalize" scope='row'>{{player.user.first_name}}</td>
-        <td class="capitalize">{{player.user.last_name}}</td>
-        <td class="capitalize">Player</td>
-      </tr>
-  {{/each}}
+      <form class="remove-from-team-form">
+      {{#each coaches as |coach|}}
+        <tr>
+          <td class="capitalize" scope='row'>{{coach.user.first_name}}</td>
+          <td class="capitalize">{{coach.user.last_name}}</td>
+          <td class="capitalize">Coach</td>
+          {{#if ../is_coach}}
+          <td><button type="submit" class="btn btn-danger" data-user-id="{{coach.user.id}}" data-user-role-id="{{coach.id}}" data-team-id="{{../team.id}}">Remove</button></td>
+          {{/if}}
+        </tr>
+      {{/each}}
+      
+      {{#each players as |player|}}
+        <tr>
+          <td class="capitalize" scope='row'>{{player.user.first_name}}</td>
+          <td class="capitalize">{{player.user.last_name}}</td>
+          <td class="capitalize">Player</td>
+          {{#if ../is_coach}}
+          <td><button type="submit" class="btn btn-danger" data-user-id="{{player.user.id}}" data-user-role-id="{{player.id}}" data-team-id="{{../team.id}}">Remove</button></td>
+          {{/if}}
+        </tr>
+      {{/each}}
+      </form>
     </tbody>
 </table>
 

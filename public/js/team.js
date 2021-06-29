@@ -138,6 +138,29 @@ const removeFromTeamHandler = async (event) => {
   }
 };
 
+const deleteTeamHandler = async (event) => {
+  event.preventDefault();
+
+  const delBtn = document.querySelector('.delete-team-button');
+
+  const teamId = delBtn.getAttribute('data-team-id');
+
+  const confirmed = confirm('Are you positive you want to delete this team?');
+
+  if (teamId && confirmed) {
+    const response = await fetch(`/api/team/${teamId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      document.location.replace('/');
+    } else {
+      alert(response.statusText);
+      alert('Failed to delete team');
+    }
+  }
+};
+
 if (document.querySelector('.new-team-form')) {
   document
     .querySelector('.new-team-form')
@@ -166,4 +189,10 @@ if (document.querySelector('.remove-from-team-form')) {
   document
     .querySelector('.remove-from-team-form')
     .addEventListener('submit', removeFromTeamHandler);
+}
+
+if (document.querySelector('.delete-team-button')) {
+  document
+    .querySelector('.delete-team-button')
+    .addEventListener('click', deleteTeamHandler);
 }

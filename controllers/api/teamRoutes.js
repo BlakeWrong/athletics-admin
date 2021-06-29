@@ -66,6 +66,8 @@ router.get('/:id', withAuth, async (req, res) => {
         },
       ],
     });
+
+    teamData.events.sort((a, b) => a.event_date - b.event_date);
     res.status(200).json(teamData);
   } catch (err) {
     res.status(500).json(err);
@@ -124,6 +126,25 @@ router.put('/:id', withAuth, async (req, res) => {
     res.status(200).json(editedTeam);
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    const roleData = await Team.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!roleData) {
+      res.status(404).json({ message: 'No team found with this id.' });
+      return;
+    }
+
+    res.status(200).json(roleData);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

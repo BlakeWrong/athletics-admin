@@ -28,14 +28,18 @@ npm install
 ```
 
 ## Usage
+A live version of the application can be found on the web [on heroku](https://abc-myteam.herokuapp.com/login).
 
-To start the application use
+If running the application locally use
 
 ```
 npm run start
 ```
+![scheduling module](assets/images/screenshot1.png)
 
-![alt text](assets/images/screenshot.png)
+![system generated email](assets/images/screenshot2.png)
+
+![announcement module](assets/images/screenshot3.png)
 
 ## Contributions
 

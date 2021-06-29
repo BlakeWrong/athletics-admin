@@ -9,6 +9,7 @@ const {
 } = require('../models');
 const withAuth = require('../utils/auth');
 const isAdmin = require('../utils/admin');
+const { Op } = require('sequelize');
 
 router.get('/', withAuth, async (req, res) => {
   //route to render home page
@@ -35,7 +36,7 @@ router.get('/', withAuth, async (req, res) => {
       attributes: { exclude: ['password'] },
     });
     const home_user = homeUserData.get({ plain: true });
-    console.log('req.session.teams :>> ', req.session.teams);
+    // console.log('req.session.teams :>> ', req.session.teams);
     res.render('homepage', {
       user,
       is_admin: req.session.is_admin,
@@ -124,8 +125,8 @@ router.get('/users', withAuth, isAdmin, async (req, res) => {
 
     const teams = teamData.map((team) => team.get({ plain: true }));
     const roles = roleData.map((role) => role.get({ plain: true }));
-    console.log('teams :>> ', teams);
-    console.log('roles :>> ', roles);
+    // console.log('teams :>> ', teams);
+    // console.log('roles :>> ', roles);
     const homeUserData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
     });
@@ -215,11 +216,17 @@ router.get('/team/:id', withAuth, async (req, res) => {
     const homeUserData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
     });
+    const current = new Date();
     const home_user = homeUserData.get({ plain: true });
     const teamData = await Team.findByPk(req.params.id, {
       include: [
         {
           model: Event,
+          where: {
+            event_date: {
+              [Op.gte]: current,
+            },
+          },
         },
         {
           model: Role,
@@ -269,7 +276,7 @@ router.get('/team/:id', withAuth, async (req, res) => {
       ],
     });
     const users = userData.map((user) => user.get({ plain: true }));
-
+    teamData.events.sort((a, b) => a.event_date - b.event_date);
     const team = teamData.get({ plain: true, nest: true });
 
     const roles = team.roles.map((role) => role);
@@ -284,6 +291,9 @@ router.get('/team/:id', withAuth, async (req, res) => {
       return role.user_roles;
     })[0];
 
+    // console.log('coaches :>> ', coaches);
+    // console.log('players :>> ', players);
+
     const player_role_id = team.roles.find(
       (role) => role.title === 'Player'
     ).id;
@@ -291,9 +301,12 @@ router.get('/team/:id', withAuth, async (req, res) => {
     const isCoach = coaches.some(
       (coach) => coach.user.id === req.session.user_id
     );
-    console.log('is_coach :>> ', isCoach);
+
+    const isCoachOrAdmin = isCoach || req.session.is_admin;
+    // console.log('isCoachOrAdmin :>> ', isCoachOrAdmin);
 
     res.render('team', {
+      is_coach_or_admin: isCoachOrAdmin,
       player_role_id,
       users,
       is_coach: isCoach,

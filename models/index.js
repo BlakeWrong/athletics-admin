@@ -25,8 +25,8 @@ User.hasMany(UserRole, {
   onDelete: 'CASCADE',
 });
 
-UserRole.belongsTo(Role, {
-  foreignKey: 'role_id',
+UserRole.belongsTo(User, {
+  foreignKey: 'user_id',
   onDelete: 'CASCADE',
 });
 
@@ -35,13 +35,9 @@ Role.hasMany(UserRole, {
   onDelete: 'CASCADE',
 });
 
-UserRole.belongsTo(User, {
-  foreignKey: 'user_id',
+UserRole.belongsTo(Role, {
+  foreignKey: 'role_id',
   onDelete: 'CASCADE',
-});
-
-Role.belongsTo(Team, {
-  foreignKey: 'team_id',
 });
 
 Team.hasMany(Role, {
@@ -49,8 +45,9 @@ Team.hasMany(Role, {
   onDelete: 'CASCADE',
 });
 
-Event.belongsTo(Team, {
+Role.belongsTo(Team, {
   foreignKey: 'team_id',
+  onDelete: 'CASCADE',
 });
 
 Team.hasMany(Event, {
@@ -58,8 +55,9 @@ Team.hasMany(Event, {
   onDelete: 'CASCADE',
 });
 
-Announcement.belongsTo(Team, {
+Event.belongsTo(Team, {
   foreignKey: 'team_id',
+  onDelete: 'CASCADE',
 });
 
 Team.hasMany(Announcement, {
@@ -67,4 +65,8 @@ Team.hasMany(Announcement, {
   onDelete: 'CASCADE',
 });
 
+Announcement.belongsTo(Team, {
+  foreignKey: 'team_id',
+  onDelete: 'CASCADE',
+});
 module.exports = { User, Role, Team, UserRole, Event, Announcement };

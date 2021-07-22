@@ -69,4 +69,5 @@ Announcement.belongsTo(Team, {
   foreignKey: 'team_id',
   onDelete: 'CASCADE',
 });
+
 module.exports = { User, Role, Team, UserRole, Event, Announcement };
